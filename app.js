@@ -27,44 +27,45 @@ const articleSchema = new mongoose.Schema({
 
 const Article = mongoose.model("Article", articleSchema);
 
-// GET All Articles from DB
-app.get("/articles", function (req, res) {
-    Article.find({}, function (err, records) {
-        if (!err) {
-            res.send(records);
-        } else {
-            res.send(err);
-        }
-    });
-});
 
-// POST a NEW article into DB
-app.post("/articles", function (req, res) {
+/* GET all Articles from DB,
+POST a new article into DB,
+DELETE all Articles  */
 
-    const newRecord = new Article({
-        title: req.body.title,
-        content: req.body.content,
-    });
+app.route("/articles")
+    .get(function (req, res) {
+        Article.find({}, function (err, records) {
+            if (!err) {
+                res.send(records);
+            } else {
+                res.send(err);
+            }
+        });
+    })
+    .post(function (req, res) {
 
-    newRecord.save(function (err) {
-        if (!err) {
-            res.send("Successfully added a new article!");
-        } else {
-            res.send(err);
-        }
-    });
-});
+        const newRecord = new Article({
+            title: req.body.title,
+            content: req.body.content,
+        });
 
-// DELETE All Articles
-app.delete("/articles", function (req, res) {
-    Article.deleteMany({}, function (err) {
-        if (!err) {
-            res.send("Successfully deleted all records!");
-        } else {
-            res.send(err);
-        }
+        newRecord.save(function (err) {
+            if (!err) {
+                res.send("Successfully added a new article!");
+            } else {
+                res.send(err);
+            }
+        });
+    })
+    .delete(function (req, res) {
+        Article.deleteMany({}, function (err) {
+            if (!err) {
+                res.send("Successfully deleted all records!");
+            } else {
+                res.send(err);
+            }
+        });
     });
-});
 
 
 app.listen(3000, function () {
