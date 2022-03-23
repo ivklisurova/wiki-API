@@ -27,6 +27,7 @@ const articleSchema = new mongoose.Schema({
 
 const Article = mongoose.model("Article", articleSchema);
 
+//////////////////////////////////////////// Requests Targeting All Articles //////////////////////////////////////////////////////////////
 
 /* GET all Articles from DB,
 POST a new article into DB,
@@ -66,6 +67,20 @@ app.route("/articles")
             }
         });
     });
+
+//////////////////////////////////////////// Requests Targeting Specific Articles //////////////////////////////////////////////////////////////
+
+app.route("/articles/:articleTitle")
+    .get(function (req, res) {
+        let customQuery = req.params.articleTitle;
+        Article.findOne({title: customQuery}, function (err, foundArticle) {
+            if (!err) {
+                res.send(foundArticle);
+            } else {
+                res.send(err);
+            }
+        })
+    })
 
 
 app.listen(3000, function () {
