@@ -71,20 +71,28 @@ app.route("/articles")
 //////////////////////////////////////////// Requests Targeting Specific Articles //////////////////////////////////////////////////////////////
 
 app.route("/articles/:articleTitle")
+
     .get(function (req, res) {
         let customQuery = req.params.articleTitle;
         Article.findOne({title: customQuery}, function (err, foundArticle) {
             if (!err) {
-                if (foundArticle){
+                if (foundArticle) {
                     res.send(foundArticle);
-                }
-                else {
+                } else {
                     res.send("No articles matching that title was found!");
                 }
             } else {
                 res.send(err);
             }
         })
+    })
+    .put(function (req, res) {
+        Article.replaceOne({title:req.params.articleTitle},
+            {title:req.body.title, content: req.body.content}, function (err){
+            if (!err){
+                res.send("Successfully updated article!")
+            }
+            })
     });
 
 
