@@ -75,12 +75,17 @@ app.route("/articles/:articleTitle")
         let customQuery = req.params.articleTitle;
         Article.findOne({title: customQuery}, function (err, foundArticle) {
             if (!err) {
-                res.send(foundArticle);
+                if (foundArticle){
+                    res.send(foundArticle);
+                }
+                else {
+                    res.send("No articles matching that title was found!");
+                }
             } else {
                 res.send(err);
             }
         })
-    })
+    });
 
 
 app.listen(3000, function () {
