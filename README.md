@@ -1,6 +1,6 @@
 # wiki-API
 
-REST API with Express 
+REST Express API 
 
 ### Table of contents
 * [General info](#general-info)
