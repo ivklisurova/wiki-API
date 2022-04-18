@@ -5,7 +5,7 @@ REST Express API
 ### Table of contents
 * [General info](#general-info)
 * [Built With](#build-with)
-* [Features](#features)
+* [API Documentation](#api-documention)
 
 ### General info
 API for quick WIKI notes on different topics.
