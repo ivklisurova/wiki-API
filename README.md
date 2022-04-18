@@ -8,7 +8,7 @@ REST Express API
 * [Features](#features)
 
 ### General info
-API for quick WIKI notes to different topics.
+API for quick WIKI notes on different topics.
 
 ### Built With
 - Express
